@@ -37,7 +37,7 @@ You can set the following command line options:
 You can avoid the question prompts with the following options:
 
  * `--firebase=<instance>`: specify your Firebase instance name
- * `--providers=<name>`: Comma separated list of FirebaseSimpleLogin providers to install (password, facebook, twitter, or persona)
+ * `--providers=<name>`: Comma separated list of FirebaseSimpleLogin providers to install (password, facebook, twitter, google, github)
  * `--default`: accept defaults for any other yes/no questions
 
 ### What does it do?
