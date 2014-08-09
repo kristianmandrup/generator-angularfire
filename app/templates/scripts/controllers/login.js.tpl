@@ -14,6 +14,9 @@ angular.module('<%= scriptAppName %>')
         $scope.err = err? err + '' : null;
       });
     };
+
+    $scope.logout = simpleLogin.logout;
+
 <% } %><% if( usePasswordAuth ) { %>
     $scope.loginPassword = function(cb) {
       $scope.err = null;
@@ -32,8 +35,6 @@ angular.module('<%= scriptAppName %>')
         });
       }
     };
-
-    $scope.logout = simpleLogin.logout;
 
     $scope.createAccount = function() {
       function assertValidLoginAttempt() {
