@@ -2,7 +2,7 @@
    "bower": {
       "default": {
          "firebase": "~1.0.2",
-         "angularfire": "~0.6.0"
+         "angularfire": "~0.8.0"
       },
       "simple": {
          "firebase-simple-login": "~1.0.2"
@@ -10,6 +10,7 @@
    },
    "simpleLoginProviders": [
       {"name": "Facebook",       "value": "facebook", "checked": true},
+      {"name": "Google",         "value": "google"},
       {"name": "Twitter",        "value": "twitter"},
       {"name": "Email/Password", "value": "password"}
    ]

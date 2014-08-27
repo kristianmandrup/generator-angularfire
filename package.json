@@ -21,7 +21,7 @@
     "test": "mocha"
   },
   "dependencies": {
-     "yeoman-generator": "~0.14.0",
+     "yeoman-generator": ">=0.14.0",
      "chalk": "~0.3.0",
      "wiredep": "~0.4.2"
   },
@@ -30,7 +30,7 @@
   },
   "peerDependencies": {
     "yo": ">=1.0.0",
-    "generator-angular": "~0.7.1"
+    "generator-angular": ">=0.7.1"
   },
   "engines": {
     "node": ">=0.8.0",

@@ -3,9 +3,9 @@
 // Declare app level module which depends on filters, and services
 angular.module('<%= scriptAppName %>')
 
-  // version of this seed app is compatible with angularFire 0.6
+  // version of this seed app is compatible with angularFire 0.8
   // see tags for other versions: https://github.com/firebase/angularFire-seed/tags
-  .constant('angularFireVersion', '0.6')
+  .constant('angularFireVersion', '0.8')
 
   // where to redirect users if they need to authenticate (see module.routeSecurity)
   .constant('loginRedirectPath', '/login')
