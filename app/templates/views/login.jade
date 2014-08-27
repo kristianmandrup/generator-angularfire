@@ -1,0 +1,44 @@
+/ wait for auth to resolve (avoid flashing login page before redirect -->
+div(ng-cloak class="row")
+    div(class="col-md-12")
+        / examples for fun and profit -->
+        / div ng-show-auth="login">{{auth.user|json}}
+        / div ng-show-auth="error,logout">Logged out
+        / div ng-show-auth="error">{{auth.error}}
+        <% if( useOauth ) {%> 
+            fieldset
+                legend Oauth
+                p <% _.each( selectedProviders, function( provider ) { %><% if ( provider.value !== 'password' ){ %>
+                button(class="btn btn-lg btn-primary" ng-click="login('<%- provider.value %>')"><%- provider.name %><% } %>)<% }); %>
+                p
+        <% } %>
+        <% if( usePasswordAuth ) { %>
+        p &nbsp;
+        form(role="form")
+            fieldset
+                legend Email/Password
+                div(class="row")
+                    div(class="col-md-6")
+                        div(class="form-group")
+                            label email
+                            input(class="form-control" type="text" ng-model="email")
+
+                        div(class="form-group")
+                            label password
+                            input(class="form-control" type="password" ng-model="pass")
+                        
+
+                        div(class="form-group" ng-show="createMode")
+                            label(confirm) pass
+                            input(class="form-control" type="password" ng-model="confirm")
+
+                        button(class="btn btn-primary" ng-click="loginPassword()" ng-hide="createMode") Log In
+                        button(class="btn btn-default" ng-click="createMode = true" ng-hide="createMode") Register
+                        button(class="btn btn-success" ng-show="createMode" ng-click="createAccount()") Create Account
+                        button(class="btn btn-default" ng-show="createMode" ng-click="createMode = false") Cancel
+        <% } %>
+
+        br
+        div(ng-show="err" class="alert alert-danger") 
+            strong {{err}}
+

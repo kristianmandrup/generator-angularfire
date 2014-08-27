@@ -11,6 +11,7 @@
    "simpleLoginProviders": [
       {"name": "Facebook",       "value": "facebook", "checked": true},
       {"name": "Google",         "value": "google"},
+      {"name": "Github",         "value": "github"},
       {"name": "Twitter",        "value": "twitter"},
       {"name": "Email/Password", "value": "password"}
    ]
