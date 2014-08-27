@@ -38,7 +38,7 @@ Generator.prototype.askFor = function askFor() {
    apputil.title();
    var _ = this._;
    var cb = this.async();
-   var configProps = this.configProps = { firebase: null, routing: false, simple: false, loginPage: false, providers: [] };
+   var configProps = this.configProps = { firebase: null, routing: false, simple: false, loginPage: false, providers: [], scriptLang: 'js', viewLang: 'html' };
    var prompts = buildPrompts(this._, this.configProps, this.options);
 
    this.prompt(prompts, function (answers) {
@@ -63,18 +63,26 @@ Generator.prototype.askFor = function askFor() {
 
 Generator.prototype.copyTemplates = function() {
    apputil.title('Building files in %yellowapp/%/yellow folder...');
+
+   var lng = configProps.scriptLang;
+   var viewLng = configProps.viewLang;
+   var scriptsDir = 'scripts' + lng;
+   var servicesDir = scriptsDir + '/services';
+   var angularFireDir = scriptsDir + '/angularfire'
+   var controllersDir = scriptsDir + '/controllers'
+
    //todo move these to config.json
-   this._copyTemplate('config.js', 'scripts/angularfire');
-   this._copyTemplate('firebase.js', 'scripts/services');
+   this._copyTemplate('config.' + lng, angularFireDir);
+   this._copyTemplate('firebase.' + lng, servicesDir);
    if( this.configProps.simple ) {
-      this._copyTemplate('login.js.tpl', 'scripts/services');
-      this._copyTemplate('simpleLoginTools.js', 'scripts/angularfire');
+      this._copyTemplate('login.' + lng + '.tpl', servicesDir);
+      this._copyTemplate('simpleLoginTools.' + lng, angularFireDir);
       if( this.configProps.routing ) {
-         this._copyTemplate('routesecurity.js', 'scripts/angularfire');
+         this._copyTemplate('routesecurity.' + lng, angularFireDir);
       }
       if( this.configProps.loginPage ) {
-         this._copyTemplate('login.js.tpl', 'scripts/controllers');
-         this._copyTemplate('login.html', 'views');
+         this._copyTemplate('login.' + lng + '.tpl', controllersDir);
+         this._copyTemplate('login.' + viewLng, 'views');
       }
    }
 };
@@ -458,7 +466,28 @@ function buildPrompts(_, configProps, options) {
          when: function(answers) {
             return answers.simple;
          }
-      }
+      },
+      {
+         type: 'radio',
+         name: 'language',
+         message: 'Which scripting language shall I use?',
+         choices: ['js', 'coffee', 'ls'],
+         when: function(answers) {
+            return answers.simple || options.default;
+         },
+         default: ['js']
+      },
+      {
+         type: 'radio',
+         name: 'template language',
+         message: 'Which template language shall I use?',
+         choices: ['html', 'jade'],
+         when: function(answers) {
+            return answers.simple || options.default;
+         },
+         default: ['html']
+      }      
+
    ];
 
    var prompts = [];

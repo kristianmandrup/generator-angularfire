@@ -1,19 +1,16 @@
-'use strict';
+'use strict'
 
 angular.module('angularfire.firebase', ['firebase'])
 
-  // A quick wrapper to abstract creating Firebase references
-  .factory('firebaseRef', function (Firebase, FBURL) {
-    function pathRef(args) {
-      for (var i = 0; i < args.length; i++) {
-        if (typeof(args[i]) === 'object') {
-          args[i] = pathRef(args[i]);
-        }
-      }
-      return args.join('/');
-    }
+  # A quick wrapper to abstract creating Firebase references
+  .factory('firebaseRef', (Firebase, FBURL) ->
+    pathRef(args) ->
+      for (var i = 0; i < args.length; i++)
+        if (typeof(args[i]) === 'object')
+          args[i] = pathRef args[i]
+      args.join '/'
 
-    /**
+    ###
      * Example:
      * <code>
      *    function(firebaseRef) {
@@ -25,17 +22,16 @@ angular.module('angularfire.firebase', ['firebase'])
      * @name firebaseRef
      * @param {String|Array...} path relative path to the root folder in Firebase instance
      * @return a Firebase instance
-     */
-    return function () {
-      return new Firebase(pathRef([FBURL].concat(Array.prototype.slice.call(arguments))));
-    };
-  })
+    ###
+    ->
+      new Firebase(pathRef([FBURL].concat(Array.prototype.slice.call(arguments))))
+  )
 
-/**
+###
  * A quick wrapper to abstract creating $firebase objects (see example below)
- */
-  .service('syncData', function ($firebase, firebaseRef) {
-    /**
+###
+  .service('syncData', ($firebase, firebaseRef) ->
+    ###
      * Create a $firebase reference with just a relative path. For example:
      *
      * <code>
@@ -53,12 +49,10 @@ angular.module('angularfire.firebase', ['firebase'])
      * @param {String|Array...} path relative path to the root folder in Firebase instance
      * @param {int} [limit]
      * @return a Firebase instance
-     */
-    return function (path, limit) {
-      var ref = firebaseRef(path);
-      if( limit ) {
-        ref = ref.limit(limit);
-      }
-      return $firebase(ref);
-    };
-  });
+    ###
+    (path, limit) ->
+      ref = firebaseRef(path)
+      if( limit )
+        ref = ref.limit(limit)
+      $firebase(ref)
+  );
